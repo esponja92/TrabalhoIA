@@ -1,4 +1,4 @@
-class CornerPlayer:
+class FrodoPlayer:
   def __init__(self, color):
     self.color = color
 
@@ -7,8 +7,7 @@ class CornerPlayer:
 
   def getNearestCorner(self, moves):
     import math
-    #corners = [[1,1],[1,8], [8,1], [8,8]]
-    corners = [[1,1]]
+    corners = [[1,1],[2,2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8]]
     minDist = 10
     retMove = None
     for move in moves:
