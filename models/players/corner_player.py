@@ -7,8 +7,7 @@ class CornerPlayer:
 
   def getNearestCorner(self, moves):
     import math
-    #corners = [[1,1],[1,8], [8,1], [8,8]]
-    corners = [[1,1]]
+    corners = [[1,1],[1,8], [8,1], [8,8]]
     minDist = 10
     retMove = None
     for move in moves:
