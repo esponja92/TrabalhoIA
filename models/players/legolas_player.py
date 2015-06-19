@@ -13,16 +13,12 @@ class Legolas:
         if (playerColor == self.color): #max player
             #print "max: ", playerColor
             if depth == 0:
-                if (playerColor == board.WHITE):
-                    return [None, board.score()[0]]
-                else:
-                    return [None, board.score()[1]]
+                return [None, self.getScore(board)]
             moves = board.valid_moves(playerColor)
             if (len(moves) == 0):
-                if (playerColor == board.WHITE):
-                    return [None, board.score()[0]]
-                else:
-                    return [None, board.score()[1]]
+                if (len(board.valid_moves(board._opponent(playerColor))) == 0):
+                    return [None, self.getScore(board)]
+                return self.minimax(depth - 1, alpha, beta, board, board._opponent(playerColor))
             
             maxScore = -float("inf")
             for move in moves:
@@ -40,16 +36,12 @@ class Legolas:
         else: #min player
             #print "min: ", playerColor
             if depth == 0:
-                if (playerColor == board.WHITE):
-                    return [None, board.score()[0]]
-                else:
-                    return [None, board.score()[1]]
+                return [None, self.getScore(board)]
             moves = board.valid_moves(playerColor)
             if (len(moves) == 0):
-                if (playerColor == board.WHITE):
-                    return [None, board.score()[0]]
-                else:
-                    return [None, board.score()[1]]
+                if (len(board.valid_moves(board._opponent(playerColor))) == 0):
+                    return [None, self.getScore(board)]
+                return self.minimax(depth - 1, alpha, beta, board, board._opponent(playerColor))
             
             minScore = float("inf")
             for move in moves:
@@ -64,3 +56,9 @@ class Legolas:
                 if (beta <= alpha):
                     break
             return [bestMove, beta]
+
+    def getScore(self, board):
+        if (self.color == board.WHITE):
+            return board.score()[0]
+        else:
+            return board.score()[1]
