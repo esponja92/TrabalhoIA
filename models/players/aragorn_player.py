@@ -25,7 +25,6 @@ class Aragorn:
 		moves = board.valid_moves(self.color)
 		best_moves = []
 		myscore = 0
-		bestMove = moves[0]
 		for move in moves:
 			myboard = board.get_clone()
 			myboard.play(move, self.color)
