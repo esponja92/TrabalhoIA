@@ -1,5 +1,5 @@
 class Legolas:
-    MAX_DEPTH = 5
+    MAX_DEPTH = 4
     def __init__(self, color):
         self.color = color
 
@@ -11,6 +11,7 @@ class Legolas:
     def minimax(self, depth, alpha, beta, board, playerColor):
         bestMove = 0
         if (playerColor == self.color): #max player
+            #print "max: ", playerColor
             if depth == 0:
                 if (playerColor == board.WHITE):
                     return [None, board.score()[0]]
@@ -35,25 +36,26 @@ class Legolas:
                     alpha = newValue
                 if (beta <= alpha):
                     break
-            return [bestMove, maxScore]
+            return [bestMove, alpha]
         else: #min player
+            #print "min: ", playerColor
             if depth == 0:
                 if (playerColor == board.WHITE):
-                    return [None, board.score()[1]]
-                else:
                     return [None, board.score()[0]]
+                else:
+                    return [None, board.score()[1]]
             moves = board.valid_moves(playerColor)
             if (len(moves) == 0):
                 if (playerColor == board.WHITE):
-                    return [None, board.score()[1]]
-                else:
                     return [None, board.score()[0]]
+                else:
+                    return [None, board.score()[1]]
             
             minScore = float("inf")
             for move in moves:
                 newBoard = board.get_clone()
-                newBoard.play(move, board._opponent(playerColor))
-                newValue = self.minimax(depth - 1, alpha, beta, newBoard, playerColor)[1]
+                newBoard.play(move, playerColor)
+                newValue = self.minimax(depth - 1, alpha, beta, newBoard, board._opponent(playerColor))[1]
                 if (minScore > newValue):
                     minScore = newValue
                     bestMove = move
@@ -61,5 +63,4 @@ class Legolas:
                     beta = newValue
                 if (beta <= alpha):
                     break
-            return [bestMove, minScore]
-
+            return [bestMove, beta]
