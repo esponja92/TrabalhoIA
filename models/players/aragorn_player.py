@@ -4,6 +4,7 @@ class Aragorn:
 	import random
 
 	def getNearestCorner(self, moves):
+		print "Criterio 3"
 		import math
 		corners = [[1,1],[1,8], [8,1], [8,8]]
 		minDist = 100
@@ -19,6 +20,10 @@ class Aragorn:
 		return retMove
 
 	def minEnemy(self, moves, board):
+<<<<<<< HEAD
+=======
+		print "Criterio 2"
+>>>>>>> 1bb68cc1c9f6287dcbab54b15f51b187b009f3b5
 		best_moves = []
 		minScore = 100
 		cor_oponente = board._opponent(self.color)
@@ -47,6 +52,10 @@ class Aragorn:
 			return self.getNearestCorner(best_moves)
 
 	def maxPlayer(self, board):
+<<<<<<< HEAD
+=======
+		print "Criterio 1"
+>>>>>>> 1bb68cc1c9f6287dcbab54b15f51b187b009f3b5
 		moves = board.valid_moves(self.color)
 		best_moves = []
 		maxScore = 0
