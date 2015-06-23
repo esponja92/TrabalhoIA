@@ -61,7 +61,28 @@ class Legolas:
 
     def getScore(self, board):
         totalScore = 0
-        totalScore += 25 * ((self.getPlayerScore(board) - self.getOpponentScore(board)) / float((self.getPlayerScore(board) + self.getOpponentScore(board))))
+        
+        playerScore = 0
+        opponentScore = 0
+
+        positionWeight = [[99, -8, 8, 6, 6, 8, -8, 99],\
+                          [-8, -24, -4, -3, -3, -4, -24, -8],\
+                          [8, -4, 7, 4, 4, 7, -4, 8],\
+                          [6, -3, 4, 0, 0, 4, -3, 6],\
+                          [6, -3, 4, 0, 0, 4, -3, 6],\
+                          [8, -4, 7, 4, 4, 7, -4, 8],\
+                          [-8, -24, -4, -3, -3, -4, -24, -8],\
+                          [99, -8, 8, 6, 6, 8, -8, 99]]
+        
+        for i in range(1,9):
+            for j in range(1,9):
+                if (board.board[i][j] == self.color):
+                    playerScore += positionWeight[i-1][j-1]
+                elif (board.board[i][j] == board._opponent(self.color)):
+                    opponentScore += positionWeight[i-1][j-1]
+
+        if (playerScore + opponentScore != 0):
+            totalScore += 25 * ((playerScore - opponentScore) / float(playerScore + opponentScore))
 
         playerValidMoves = board.valid_moves(self.color)
         opponentValidMoves = board.valid_moves(board._opponent(self.color))
