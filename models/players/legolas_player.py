@@ -87,7 +87,7 @@ class Legolas:
         playerValidMoves = board.valid_moves(self.color)
         opponentValidMoves = board.valid_moves(board._opponent(self.color))
         if (len(playerValidMoves) + len(opponentValidMoves) != 0):
-            totalScore += 50 * ((len(playerValidMoves) - len(opponentValidMoves)) / float((len(playerValidMoves) + len(opponentValidMoves))))
+            totalScore += 5 * ((len(playerValidMoves) - len(opponentValidMoves)) / float((len(playerValidMoves) + len(opponentValidMoves))))
 
         playerCorners = self.getNOfCorners(board, self.color)
         opponentCorners = self.getNOfCorners(board, board._opponent(self.color))
@@ -96,19 +96,6 @@ class Legolas:
 
         #print totalScore
         return totalScore
-
-
-    def getPlayerScore(self, board):
-        if (self.color == board.WHITE):
-            return board.score()[0]
-        else:
-            return board.score()[1]
-            
-    def getOpponentScore(self, board):
-        if (self.color == board.WHITE):
-            return board.score()[1]
-        else:
-            return board.score()[0]
 
     def getNOfCorners(self, board, color):
         nOfCorners = 0
